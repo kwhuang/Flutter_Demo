@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_widget_demo/widget_demo/DefaultTabController.dart';
+import 'widget_demo/DefaultTabController.dart';
+import 'widget_demo/SingleChildScrollView.dart';
 
 void main() => runApp(MyApp());
 
@@ -47,7 +48,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   var _lists = <String>[
-    'DefaultTabController+NestedScrollView'
+    'DefaultTabController+NestedScrollView',
+    'SingleChildScrollviewDemo',
   ];
 
   @override
@@ -71,6 +73,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 if (index == 0){
                   Navigator.push(context, MaterialPageRoute(builder: (BuildContext context){
                     return DefaultTabControllerDemo();
+                  }));
+                }else if (index == 1) {
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context){
+                    return SingleChildScrollviewDemo();
                   }));
                 }
               },
