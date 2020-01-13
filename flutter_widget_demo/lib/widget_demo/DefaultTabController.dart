@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
+// 一般结合TabBar和TabBarView一起使用，达到顶部标签切换的效果
 class DefaultTabControllerDemo extends StatelessWidget {
 
-  final _tabs = <String>['1111','22222','33333'];
+  final _tabs = <String>['最近学习','学习任务'];
 
   @override
   Widget build(BuildContext context) {
@@ -15,26 +16,11 @@ class DefaultTabControllerDemo extends StatelessWidget {
             // These are the slivers that show up in the "outer" scroll view.
             return <Widget>[
               SliverOverlapAbsorber(
-                // This widget takes the overlapping behavior of the SliverAppBar,
-                // and redirects it to the SliverOverlapInjector below. If it is
-                // missing, then it is possible for the nested "inner" scroll view
-                // below to end up under the SliverAppBar even when the inner
-                // scroll view thinks it has not been scrolled.
-                // This is not necessary if the "headerSliverBuilder" only builds
-                // widgets that do not overlap the next sliver.
                 handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
                 child: SliverAppBar(
-                  title: const Text('Books'), // This is the title in the app bar.
+                  title: const Text('学习中心'), // This is the title in the app bar.
                   pinned: true,
-                  expandedHeight: 150.0,
-                  // The "forceElevated" property causes the SliverAppBar to show
-                  // a shadow. The "innerBoxIsScrolled" parameter is true when the
-                  // inner scroll view is scrolled beyond its "zero" point, i.e.
-                  // when it appears to be scrolled below the SliverAppBar.
-                  // Without this, there are cases where the shadow would appear
-                  // or not appear inappropriately, because the SliverAppBar is
-                  // not actually aware of the precise position of the inner
-                  // scroll views.
+                  expandedHeight: 330.0,
                   forceElevated: innerBoxIsScrolled,
                   bottom: TabBar(
                     // These are the widgets to put in each tab in the tab bar.
