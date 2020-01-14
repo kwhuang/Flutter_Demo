@@ -106,7 +106,6 @@ class _CustomizeTabBarState extends State<CustomizeTabBar> {
                 if (snapshot.connectionState == ConnectionState.active) {
                   return Row(
                     children: _tabs.asMap().keys.map((index) {
-                      debugPrint('当前下标：$index，当前值：${_tabs[index]}');
                       TextStyle style = snapshot.data == index ? TextStyle(color: Colors.black54) : TextStyle(color: Colors.yellow);
                       return GestureDetector(
                         key: _globalKeys[index],
@@ -148,6 +147,36 @@ class _CustomizeTabBarState extends State<CustomizeTabBar> {
     );
   }
 
+  void buildComplete(Duration duration){
+    debugPrint('--------------------------build完成啦！！');
+  }
+
+  void updateTabBarOffset(int index) {
+
+    /// 获取当前tab对应的globalkey的RenderBox
+    RenderBox renderBox = _globalKeys[index].currentContext.findRenderObject();
+
+    /// 获取当前tab的size
+    Size size = renderBox.size;
+
+    /// 获取当前tab的Offset
+    Offset offset = renderBox.localToGlobal(Offset.zero);
+
+    /// 获取屏幕宽度
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    debugPrint('当前的下标：$index; 偏移量： ${offset.dx},maxX：${offset.dx + size.width}');
+
+    /// offset为0或者
+    if (_scrollController.offset != 0 || _scrollController.offset <= (offset.dx + size.width - screenWidth)) {
+      double dx = offset.dx + size.width - screenWidth;
+      if (dx < 0) {
+        dx = 0;
+      }
+      _scrollController.animateTo(dx, duration: Duration(milliseconds: 500), curve: Curves.ease);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -160,8 +189,11 @@ class _CustomizeTabBarState extends State<CustomizeTabBar> {
     /// 初始化滚动控制器
     _scrollController = ScrollController();
     _scrollController.addListener((){
-      debugPrint('滚动偏移量：${_scrollController.offset}');
+//      debugPrint('滚动偏移量：${_scrollController.offset}');
     });
+
+    /// 监听Widget是否绘制完毕
+    WidgetsBinding.instance.addPostFrameCallback(buildComplete);
   }
 
   @override
@@ -180,37 +212,11 @@ class _CustomizeTabBarState extends State<CustomizeTabBar> {
           getTabBar(),
           Expanded(
             child: PageView(
-              /// 更新流
+              /// 页面切换
               onPageChanged: (index){
 
-                /// 获取当前tab对应的globalkey的RenderBox
-                RenderBox renderBox = _globalKeys[index].currentContext.findRenderObject();
-
-                /// 获取当前tab的size
-                Size size = renderBox.size;
-
-                /// 获取当前tab的Offset
-                Offset offset = renderBox.localToGlobal(Offset.zero);
-
-                /// 获取屏幕宽度
-                final screenWidth = MediaQuery.of(context).size.width;
-
-                /// 获取最后一个tab的RenderBox
-                RenderBox lastRenderBox = _globalKeys.last.currentContext.findRenderObject();
-
-                /// 获取最后一个tab的Size
-                Size lastSize = lastRenderBox.size;
-
-                /// 获取最后一个tab的offset.dx
-                double lastDx = lastRenderBox.localToGlobal(Offset.zero).dx;
-
-                /// scrollViewController的内容宽度
-                double contentWidth = lastDx + lastSize.width;
-
-                /// offset为0或者
-                if (_scrollController.offset != 0 || _scrollController.offset != contentWidth - screenWidth) {
-                  _scrollController.animateTo(offset.dx, duration: Duration(milliseconds: 500), curve: Curves.ease);
-                }
+                /// 更新tabbar偏移量
+                updateTabBarOffset(index);
 
                 /// 更新下标
                 currentIndex = index;
