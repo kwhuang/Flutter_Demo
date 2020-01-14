@@ -9,7 +9,7 @@ class CustomizeTabBarDemo extends StatefulWidget {
 
 class _CustomizeTabBarDemoState extends State<CustomizeTabBarDemo> with SingleTickerProviderStateMixin {
 
-  var _tabs = ['课程1','课程2','课程3','课程4','课程5','课程6','课程7','课程8'];
+  var _tabs = ['课程1','课程2','课程3','课程4','课程5','课程6','课程7','课程8','课程9','课程10'];
 
   TabController _tabController;
 
