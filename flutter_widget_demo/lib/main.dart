@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'widget_demo/DefaultTabController.dart';
 import 'widget_demo/SingleChildScrollView.dart';
 import 'widget_demo/StreamController.dart';
+import 'widget_demo/CustermerTabBarDemo.dart';
 
 void main() => runApp(MyApp());
 
@@ -52,6 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
     'DefaultTabController+NestedScrollView',
     'SingleChildScrollviewDemo',
     'StreamControllerDemo',
+    'CustomizeTabBarDemo',
   ];
 
   @override
@@ -83,6 +85,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 }else if (index == 2) {
                   Navigator.push(context, MaterialPageRoute(builder: (BuildContext context){
                     return StreamControllerDemo();
+                  }));
+                }else if (index == 3) {
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context){
+                    return CustomizeTabBarDemo();
                   }));
                 }
               },
