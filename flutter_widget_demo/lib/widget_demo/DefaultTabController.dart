@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // 一般结合TabBar和TabBarView一起使用，达到顶部标签切换的效果
 class DefaultTabControllerDemo extends StatelessWidget {
 
-  final _tabs = <String>['最近学习','学习任务'];
+  final _tabs = <String>['最近学习','学习任务','最近学习','学习任务','最近学习','学习任务'];
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +23,8 @@ class DefaultTabControllerDemo extends StatelessWidget {
                   expandedHeight: 330.0,
                   forceElevated: innerBoxIsScrolled,
                   bottom: TabBar(
+                    isScrollable: true,
+                    indicatorSize: TabBarIndicatorSize.label,
                     // These are the widgets to put in each tab in the tab bar.
                     tabs: _tabs.map((String name) => Tab(text: name)).toList(),
                   ),

@@ -11,17 +11,11 @@ class _CustomizeTabBarDemoState extends State<CustomizeTabBarDemo> with SingleTi
 
   var _tabs = ['课程1','课程2','课程3','课程4','课程5','课程6','课程7','课程8','课程9','课程10'];
 
-  TabController _tabController;
+//  TabController _tabController;
 
   @override
   void initState() {
     super.initState();
-    this._tabController = new TabController(vsync: this, length: _tabs.length);
-    this._tabController.addListener(() {
-      print(this._tabController.index);
-      print(this._tabController.length);
-      print(this._tabController.previousIndex);
-    });
   }
 
   @override
@@ -83,10 +77,13 @@ class _CustomizeTabBarState extends State<CustomizeTabBar> {
   /// 滚动控制器
   ScrollController _scrollController;
 
+  /// build完成
+  bool _isFinishBuild;
+
   /// 获取tabar
   Widget getTabBar(){
     final _tabs = widget.tabs;
-    _globalKeys = _tabs.map((title){
+    _globalKeys = _globalKeys??_tabs.map((title){
       return GlobalKey();
     }).toList();
     return Stack(
@@ -106,11 +103,11 @@ class _CustomizeTabBarState extends State<CustomizeTabBar> {
                 if (snapshot.connectionState == ConnectionState.active) {
                   return Row(
                     children: _tabs.asMap().keys.map((index) {
-                      TextStyle style = snapshot.data == index ? TextStyle(color: Colors.black54) : TextStyle(color: Colors.yellow);
+                      TextStyle style = snapshot.data == index ? TextStyle(color: Colors.black54,fontSize: 17) : TextStyle(color: Colors.yellow,fontSize: 15);
                       return GestureDetector(
                         key: _globalKeys[index],
                         child: Padding(
-                          padding: EdgeInsets.all(10),
+                          padding: EdgeInsets.only(left: 18),
                           child: Text(_tabs[index],style: style,),
                         ),
                         onTap: (){
@@ -127,30 +124,52 @@ class _CustomizeTabBarState extends State<CustomizeTabBar> {
           ),
         ),
 
-        StreamBuilder(
-          stream: indexStream,
-          builder: (BuildContext context, AsyncSnapshot<int> snapshot){
-            if (snapshot.connectionState == ConnectionState.active) {
-              return Padding(
-                padding: EdgeInsets.only(top: 40),
-                child: Container(
-                  color: Colors.white,
-                  height: 3,
-                  width: 18,
-                ),
-              );
-            }
-            return Container();
-          },
-        )
+//        StreamBuilder(
+//          stream: indexStream,
+//          builder: (BuildContext context, AsyncSnapshot<int> snapshot){
+//            if (snapshot.connectionState == ConnectionState.active) {
+//
+//
+//              double left = 18;
+//              if (_isFinishBuild){
+//                /// 获取当前tab对应的globalkey的RenderBox
+//                RenderBox renderBox = _globalKeys[snapshot.data].currentContext.findRenderObject();
+//
+//                /// 获取当前tab的size
+//                Size size = renderBox.size;
+//
+//                /// 获取当前tab的Offset
+//                Offset offset = renderBox.localToGlobal(Offset.zero);
+//
+//                left = offset.dx+size.width*0.5-9;
+//              }
+//              return LayoutBuilder(
+//                builder: (BuildContext context, BoxConstraints constraints){
+//                  debugPrint('最大宽度：${constraints.maxWidth}；最大高度：${constraints.maxHeight}');
+//                  return Padding(
+//                    padding: EdgeInsets.only(top: 40,left: left),
+//                    child: Container(
+//                      color: Colors.white,
+//                      height: 3,
+//                      width: 18,
+//                    ),
+//                  );
+//                },
+//              );
+//            }
+//            return Container();
+//          },
+//        )
       ],
     );
   }
 
   void buildComplete(Duration duration){
+    _isFinishBuild = true;
     debugPrint('--------------------------build完成啦！！');
   }
 
+  /// 更新TabBar布局
   void updateTabBarOffset(int index) {
 
     /// 获取当前tab对应的globalkey的RenderBox
@@ -165,14 +184,26 @@ class _CustomizeTabBarState extends State<CustomizeTabBar> {
     /// 获取屏幕宽度
     final screenWidth = MediaQuery.of(context).size.width;
 
-    debugPrint('当前的下标：$index; 偏移量： ${offset.dx},maxX：${offset.dx + size.width}');
+    debugPrint('--------------------当前的下标：$index; 偏移量： ${offset.dx},maxX：${offset.dx + size.width}');
+
+    /// 获取最后一个tab的位置信息
+    RenderBox lastRenderBox = _globalKeys.last.currentContext.findRenderObject();
+    Size lastSize = lastRenderBox.size;
+    Offset lastOffset = lastRenderBox.localToGlobal(Offset.zero);
+    double contentWidth = lastOffset.dx + lastSize.width;
 
     /// offset为0或者
     if (_scrollController.offset != 0 || _scrollController.offset <= (offset.dx + size.width - screenWidth)) {
-      double dx = offset.dx + size.width - screenWidth;
+      double dx = offset.dx + size.width - screenWidth + 10;
       if (dx < 0) {
         dx = 0;
       }
+
+
+      debugPrint('--------------------最后一个：${_globalKeys.length-1}; 偏移量： ${lastOffset.dx},maxX：${lastOffset.dx + lastSize.width}');
+//      if (dx >= contentWidth-screenWidth) {
+//        dx = contentWidth-screenWidth;
+//      }
       _scrollController.animateTo(dx, duration: Duration(milliseconds: 500), curve: Curves.ease);
     }
   }
@@ -182,14 +213,18 @@ class _CustomizeTabBarState extends State<CustomizeTabBar> {
     super.initState();
     /// 初始化流
     _currentIndexSubject = BehaviorSubject<int>.seeded(currentIndex);
+    _currentIndexSubject.listen((index){
+      /// 更新tabbar偏移量
+      updateTabBarOffset(index);
+    });
 
     /// 初始化分页控制器
     _pageController = PageController(initialPage: currentIndex);
 
     /// 初始化滚动控制器
-    _scrollController = ScrollController();
+    _scrollController = ScrollController(keepScrollOffset: false);
     _scrollController.addListener((){
-//      debugPrint('滚动偏移量：${_scrollController.offset}');
+      debugPrint('滚动偏移量：${_scrollController.offset}');
     });
 
     /// 监听Widget是否绘制完毕
@@ -215,15 +250,11 @@ class _CustomizeTabBarState extends State<CustomizeTabBar> {
               /// 页面切换
               onPageChanged: (index){
 
-                /// 更新tabbar偏移量
-                updateTabBarOffset(index);
-
                 /// 更新下标
                 currentIndex = index;
 
                 /// 发送流重新rebuild子widget
                 indexSink.add(index);
-
 
               },
               controller: _pageController,
