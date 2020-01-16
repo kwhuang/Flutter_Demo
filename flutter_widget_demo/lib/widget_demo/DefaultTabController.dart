@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// 一般结合TabBar和TabBarView一起使用，达到顶部标签切换的效果
+/// 一般结合TabBar和TabBarView一起使用，达到顶部标签切换的效果
 class DefaultTabControllerDemo extends StatelessWidget {
 
   final _tabs = <String>['最近学习','学习任务','最近学习','学习任务','最近学习','学习任务'];

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-//  SingleChildScrollView 类似app中的scrollview，只要添加内容超过屏幕可视范围就可以滚动
+///  SingleChildScrollView 类似app中的scrollview，只要添加内容超过屏幕可视范围就可以滚动
 class SingleChildScrollviewDemo extends StatelessWidget {
 
   @override

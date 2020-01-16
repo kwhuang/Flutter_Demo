@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 
-//  StreamController单流广播流控制器，使用BehaviorSubject（需要导入rxdart依赖）也可以使用
+///  StreamController单流广播流控制器，使用BehaviorSubject（需要导入rxdart依赖）也可以使用
 class StreamControllerDemo extends StatefulWidget {
   @override
   _StreamControllerDemoState createState() => _StreamControllerDemoState();
