@@ -73,20 +73,18 @@ class Toast {
       /// 外层使用Positioned进行定位，控制在Overlay中的位置
       return new Positioned(
           top: MediaQuery.of(context).size.height * 0.2,
-          child: new Material(
-            child: new Container(
-              color: Colors.blueGrey,
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              alignment: Alignment.center,
-              child: new Center(
-                child: new Card(
-                  child: new Padding(
-                    padding: EdgeInsets.all(8),
-                    child: new Text(message),
-                  ),
-                  color: Colors.grey,
+          child: Container(
+            color: Colors.blueGrey,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            alignment: Alignment.center,
+            child: new Center(
+              child: new Card(
+                child: new Padding(
+                  padding: EdgeInsets.all(8),
+                  child: new Text(message),
                 ),
+                color: Colors.grey,
               ),
             ),
           )
