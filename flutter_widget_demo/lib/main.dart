@@ -6,6 +6,7 @@ import 'widget_demo/StreamController.dart';
 import 'widget_demo/CustermerTabBarDemo.dart';
 import 'widget_demo/OverlayState+OverlayEntry.dart';
 import 'widget_demo/sharedPreferences.dart';
+import 'widget_demo/TranstionPushDemo.dart';
 
 void main() => runApp(MyApp());
 
@@ -130,7 +131,8 @@ class ListDemo extends StatelessWidget {
     'StreamControllerDemo',
     'CustomizeTabBarDemo',
     'OverlayEntryAndOverlayEntry',
-    'SharePreferences'
+    'SharePreferences',
+    'TranstionPushDemo'
   ];
 
   @override
@@ -174,6 +176,11 @@ class ListDemo extends StatelessWidget {
                   Navigator.push(
                       context, MaterialPageRoute(builder: (BuildContext context) {
                     return SharePreferences();
+                  }));
+                } else if (index == 6) {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (BuildContext context) {
+                    return TranstionPushDemo();
                   }));
                 }
               },
