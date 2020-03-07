@@ -7,6 +7,7 @@ import 'widget_demo/CustermerTabBarDemo.dart';
 import 'widget_demo/OverlayState+OverlayEntry.dart';
 import 'widget_demo/sharedPreferences.dart';
 import 'widget_demo/TranstionPushDemo.dart';
+import 'widget_demo/CustumDialogDemo.dart';
 
 void main() => runApp(MyApp());
 
@@ -132,7 +133,8 @@ class ListDemo extends StatelessWidget {
     'CustomizeTabBarDemo',
     'OverlayEntryAndOverlayEntry',
     'SharePreferences',
-    'TranstionPushDemo'
+    'TranstionPushDemo',
+    'CustumDialogDemo'
   ];
 
   @override
@@ -182,7 +184,16 @@ class ListDemo extends StatelessWidget {
                       context, MaterialPageRoute(builder: (BuildContext context) {
                     return TranstionPushDemo();
                   }));
+                } else if (index == 7) {
+
+                  showDialog<Null>(
+                      context: context, //BuildContext对象
+                      barrierDismissible: false,
+                      builder: (BuildContext context) {
+                        return CustumDialogDemo(text :'提示框');
+                      });
                 }
+
               },
             );
           }
