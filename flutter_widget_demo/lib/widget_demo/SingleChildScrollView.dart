@@ -20,16 +20,31 @@ class SingleChildScrollviewDemo extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  Container(
-                    // A fixed-height child.
-                    color: const Color(0xff808000), // Yellow
-                    height: 120.0,
+                  GestureDetector(
+                    onTap: (){
+                      debugPrint('点击了黄色');
+                    },
+                    child: Container(
+                      // A fixed-height child.
+                      color: const Color(0xff808000), // Yellow
+                      height: 120.0,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text('这是标题哦',style: TextStyle(fontSize: 15,color: Colors.white),),
+                      ),
+                    ),
                   ),
-                  Container(
-                    // Another fixed-height child.
-                    color: const Color(0xff008000), // Green
-                    height: 120.0,
+                  GestureDetector(
+                    onTap: (){
+                      debugPrint('点击了绿色');
+                    },
+                    child: Container(
+                      // Another fixed-height child.
+                      color: const Color(0xff008000), // Green
+                      height: 120.0,
+                    ),
                   ),
+
                   Container(
                     // A fixed-height child.
                     color: const Color(0xff808000), // Yellow
