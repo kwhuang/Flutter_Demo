@@ -8,6 +8,8 @@ import 'widget_demo/OverlayState+OverlayEntry.dart';
 import 'widget_demo/sharedPreferences.dart';
 import 'widget_demo/TranstionPushDemo.dart';
 import 'widget_demo/CustumDialogDemo.dart';
+import 'widget_demo/CustomAppBarDemo.dart';
+import 'widget_demo/CupertinoDemo.dart';
 
 void main() => runApp(MyApp());
 
@@ -78,12 +80,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
 
+
   int _currentIndex = 0;
   final List<Widget> _children = [
     ListDemo(),
     OverlayEntryAndOverlayEntry(),
-    Scaffold(),
-    Scaffold(),
+    CustomAppBarDemo(),
+    CupertinoDemo(),
   ];
 
   @override
