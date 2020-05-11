@@ -53,7 +53,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
       return LayoutId(
         id: _CustomAppBarLayoutDelegate.leftID,
         child: Container(
-            padding: const EdgeInsets.only(left: 5),
+//            padding: const EdgeInsets.only(left: 5),
             child: widget.left,
           ),
       );
@@ -79,7 +79,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
       return LayoutId(
         id: _CustomAppBarLayoutDelegate.rightID,
         child: Container(
-          padding: const EdgeInsets.only(right: 5),
+//          padding: const EdgeInsets.only(right: 5),
           child: widget.right,
         ),
       );
@@ -153,7 +153,7 @@ class _CustomAppBarLayoutDelegate extends MultiChildLayoutDelegate {
     /// 重新设置大小
     final Size leftSize = layoutChild(leftID, BoxConstraints.loose(Size(44, 44)));
     final Size titleSize = layoutChild(titleID, BoxConstraints.loose(Size(size.width-88*2,44)));
-    final Size rightSize = layoutChild(rightID, BoxConstraints.loose(Size(88, 44)));
+    final Size rightSize = layoutChild(rightID, BoxConstraints.loose(Size(96, 44)));
 
     debugPrint('left------宽度:${leftSize.width}；高度:${leftSize.height}');
     debugPrint('title------宽度:${titleSize.width}；高度:${titleSize.height}');
