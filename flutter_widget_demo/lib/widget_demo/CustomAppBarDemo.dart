@@ -36,12 +36,29 @@ class _CustomAppBarDemoState extends State<CustomAppBarDemo> {
             ),
           ],
         ),
-        title: Text('CustomAppBarDemonnuoononoinoinoinoinoinoinoinofsafasfasfasdinonono',overflow: TextOverflow.ellipsis,maxLines: 1,textAlign: TextAlign.center,),
+        title: Text('CustomAppBarDemo',overflow: TextOverflow.ellipsis,maxLines: 1,textAlign: TextAlign.center,),
         backgroundColor: Colors.white,
       ),
-      body: Container(
-        child: Center(
-          child: Text('自定义appbar'),
+      body: SafeArea(
+        child: Container(
+          height: 200,
+          width: MediaQuery.of(context).size.width,
+          color: Colors.yellow,
+          child:RichText(
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+
+            text: TextSpan(
+              text: 'PageStorageKey继承自ValueKey，其实就是一个Key，保存状态用的。PageStorageKey：它是定义PageStorage的value将保存在何处的一个ValueKey。Scrollable（实际上是ScrollPosition）以及它的相关类使用PageStorage保存滚动偏移量。每次滚动完成时，滚动条的页面存储都会更新。',
+              style: TextStyle(color: Colors.black38),
+              children: [
+                TextSpan(
+                  text: '查看 >',
+                  style: TextStyle(color: Colors.blue),
+                )
+              ]
+            ),
+          ),
         ),
       ),
     );

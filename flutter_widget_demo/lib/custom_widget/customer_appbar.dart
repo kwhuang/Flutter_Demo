@@ -67,7 +67,9 @@ class _CustomAppBarState extends State<CustomAppBar> {
         id: _CustomAppBarLayoutDelegate.titleID,
         child: Container(
           padding: widget.titleEdgeInsets,
-          child: widget.title,
+          child: Center(
+            child: widget.title,
+          ),
         ),
       );
     }
