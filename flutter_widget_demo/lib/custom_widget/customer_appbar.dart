@@ -150,23 +150,19 @@ class _CustomAppBarLayoutDelegate extends MultiChildLayoutDelegate {
     /// 获取当前BoxConstraints
     final BoxConstraints constraints = BoxConstraints(maxWidth: size.width);
 
-    /// 官方说明必须每个子Widget必须执行一次layoutChild
-    final Size leftSize = layoutChild(leftID, constraints);
-    final Size titleSize = layoutChild(titleID, constraints);
-    final Size rightSize = layoutChild(rightID, constraints);
+    /// 重新设置大小
+    final Size leftSize = layoutChild(leftID, BoxConstraints.loose(Size(44, 44)));
+    final Size titleSize = layoutChild(titleID, BoxConstraints.loose(Size(size.width-88*2,44)));
+    final Size rightSize = layoutChild(rightID, BoxConstraints.loose(Size(88, 44)));
 
     debugPrint('left------宽度:${leftSize.width}；高度:${leftSize.height}');
     debugPrint('title------宽度:${titleSize.width}；高度:${titleSize.height}');
     debugPrint('right------宽度:${rightSize.width}；高度:${rightSize.height}');
 
-    /// 重新布局left
+    /// 重新设置位置
     positionChild(leftID, Offset(0.0, 0.0));
-
-    /// 重新布局title
     final double titleX = leftSize.width > rightSize.width ? leftSize.width : rightSize.width;
-    positionChild(titleID, Offset(leftSize.width, 0));
-
-    /// 重新布局right
+    positionChild(titleID, Offset(titleX, size.height/2 - titleSize.height/2));
     positionChild(rightID, Offset(size.width-rightSize.width,0));
 
   }
