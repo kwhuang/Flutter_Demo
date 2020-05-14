@@ -10,6 +10,7 @@ import 'widget_demo/TranstionPushDemo.dart';
 import 'widget_demo/CustumDialogDemo.dart';
 import 'widget_demo/CustomAppBarDemo.dart';
 import 'widget_demo/CupertinoDemo.dart';
+import 'widget_demo/ListViewCutDownDemo.dart';
 
 void main() => runApp(MyApp());
 
@@ -137,7 +138,8 @@ class ListDemo extends StatelessWidget {
     'OverlayEntryAndOverlayEntry',
     'SharePreferences',
     'TranstionPushDemo',
-    'CustumDialogDemo'
+    'CustumDialogDemo',
+    'ListViewCutDownDemo'
   ];
 
   @override
@@ -195,6 +197,11 @@ class ListDemo extends StatelessWidget {
                       builder: (BuildContext context) {
                         return CustumDialogDemo(text :'提示框');
                       });
+                }else if (index == 8) {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (BuildContext context) {
+                    return ListViewCutDownDemo();
+                  }));
                 }
 
               },

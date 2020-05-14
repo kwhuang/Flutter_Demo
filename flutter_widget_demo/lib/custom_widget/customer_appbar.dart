@@ -92,24 +92,27 @@ class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container(
-      color: widget.backgroundColor,
-      child: SafeArea(
-        top: true,
-        child: Container(
-            decoration: UnderlineTabIndicator(
-              borderSide: BorderSide(width: widget.underlineHeight, color: widget.underlineColor),
-            ),
-            height: widget.appBarHeight,
-            width: MediaQuery.of(context).size.width,
-            child: CustomMultiChildLayout(
-              delegate: _CustomAppBarLayoutDelegate(),
-              children: <Widget>[
-                leftWidget(),
-                titleWidget(),
-                rightWidget()
-              ],
-            )
+    return Opacity(
+      opacity: 0.0,
+      child: Container(
+        color: widget.backgroundColor,
+        child: SafeArea(
+          top: true,
+          child: Container(
+              decoration: UnderlineTabIndicator(
+                borderSide: BorderSide(width: widget.underlineHeight, color: widget.underlineColor),
+              ),
+              height: widget.appBarHeight,
+              width: MediaQuery.of(context).size.width,
+              child: CustomMultiChildLayout(
+                delegate: _CustomAppBarLayoutDelegate(),
+                children: <Widget>[
+                  leftWidget(),
+                  titleWidget(),
+                  rightWidget()
+                ],
+              )
+          ),
         ),
       ),
     );
