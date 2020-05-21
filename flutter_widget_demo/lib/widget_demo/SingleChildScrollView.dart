@@ -45,6 +45,37 @@ class SingleChildScrollviewDemo extends StatelessWidget {
                     ),
                   ),
 
+              SizedBox.fromSize(
+                size: Size.fromHeight(68),
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return SizedBox.fromSize(
+                      size: Size(123,68),
+                      child: Center(
+                        child: Text('第${index}个'),
+                      ),
+                    );
+                  },
+                  itemCount: 5,
+                ),
+              ),
+                  SizedBox.fromSize(
+                    size: Size.fromHeight(68),
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return SizedBox.fromSize(
+                          size: Size(123,68),
+                          child: Center(
+                            child: Text('第${index}个'),
+                          ),
+                        );
+                      },
+                      itemCount: 5,
+                    ),
+                  ),
+
                   Container(
                     // A fixed-height child.
                     color: const Color(0xff808000), // Yellow
