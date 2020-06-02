@@ -11,6 +11,7 @@ import 'widget_demo/CustumDialogDemo.dart';
 import 'widget_demo/CustomAppBarDemo.dart';
 import 'widget_demo/CupertinoDemo.dart';
 import 'widget_demo/ListViewCutDownDemo.dart';
+import 'widget_demo/DataSharingDemo.dart';
 
 void main() => runApp(MyApp());
 
@@ -139,7 +140,8 @@ class ListDemo extends StatelessWidget {
     'SharePreferences',
     'TranstionPushDemo',
     'CustumDialogDemo',
-    'ListViewCutDownDemo'
+    'ListViewCutDownDemo',
+    'DataSharingDemo'
   ];
 
   @override
@@ -201,6 +203,11 @@ class ListDemo extends StatelessWidget {
                   Navigator.push(
                       context, MaterialPageRoute(builder: (BuildContext context) {
                     return ListViewCutDownDemo();
+                  }));
+                }else if (index == 9) {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (BuildContext context) {
+                    return DataSharingDemo();
                   }));
                 }
 
