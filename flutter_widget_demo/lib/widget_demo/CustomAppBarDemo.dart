@@ -2,6 +2,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_demo/custom_widget/customer_appbar.dart';
+import 'package:flutter_widget_demo/custom_widget/appbar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomAppBarDemo extends StatefulWidget {
   @override
@@ -9,35 +11,28 @@ class CustomAppBarDemo extends StatefulWidget {
 }
 
 class _CustomAppBarDemoState extends State<CustomAppBarDemo> {
+
+  Future<bool> checkIsInstallBaiduMap() async {
+    String url = 'baidumap://';
+    bool isInstall = await canLaunch(url);
+    debugPrint('${!isInstall ? '没有安装' : '安装了'}百度地图');
+    return isInstall;
+  }
+
   @override
   Widget build(BuildContext context) {
+    checkIsInstallBaiduMap();
     return Scaffold(
-      appBar: CustomAppBar(
-        titleEdgeInsets: EdgeInsets.only(left: 5,right: 5),
-        left: IconButton(
-          icon:Icon(Icons.arrow_left),
-          onPressed: (){
-            Navigator.pop(context);
-          },
-        ),
-        right: Row(
-          children: <Widget>[
-            IconButton(
-              icon:Icon(Icons.arrow_left),
-              onPressed: (){
-                Navigator.pop(context);
-              },
-            ),
-            IconButton(
-              icon:Icon(Icons.arrow_left),
-              onPressed: (){
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-        title: Text('CustomAppBarDemo',overflow: TextOverflow.ellipsis,maxLines: 1,textAlign: TextAlign.center,),
-        backgroundColor: Colors.white,
+      appBar: BaseViewBar(
+          childView: new BaseTitleBar(
+            "首页",
+            leftIcon: Icons.arrow_back_ios,
+            rightText: "提交",
+            rightClick: () {
+              print("点击了干嘛啊。。。哦");
+            },
+          ),
+          preferredSize: Size.fromHeight(50.0)
       ),
       body: SafeArea(
         child: Container(

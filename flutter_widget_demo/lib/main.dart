@@ -12,6 +12,7 @@ import 'widget_demo/CustomAppBarDemo.dart';
 import 'widget_demo/CupertinoDemo.dart';
 import 'widget_demo/ListViewCutDownDemo.dart';
 import 'widget_demo/DataSharingDemo.dart';
+import 'widget_demo/CustomPaintorDemo.dart';
 
 void main() => runApp(MyApp());
 
@@ -142,6 +143,7 @@ class ListDemo extends StatelessWidget {
     'CustumDialogDemo',
     'ListViewCutDownDemo',
     'DataSharingDemo'
+    'CustomPaintorDemo'
   ];
 
   @override
@@ -209,6 +211,10 @@ class ListDemo extends StatelessWidget {
                       context, MaterialPageRoute(builder: (BuildContext context) {
                     return DataSharingDemo();
                   }));
+                } else if (index == 10 ) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context){
+                    return PainterDemo();
+                }));
                 }
 
               },

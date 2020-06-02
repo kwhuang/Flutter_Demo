@@ -76,26 +76,30 @@ class SingleChildScrollviewDemo extends StatelessWidget {
                     ),
                   ),
 
-                  Container(
-                    // A fixed-height child.
-                    color: const Color(0xff808000), // Yellow
-                    height: 120.0,
-                  ),
-                  Container(
-                    // Another fixed-height child.
-                    color: const Color(0xff008000), // Green
-                    height: 120.0,
-                  ),
-                  Container(
-                    // A fixed-height child.
-                    color: const Color(0xff808000), // Yellow
-                    height: 120.0,
-                  ),
-                  Container(
-                    // Another fixed-height child.
-                    color: const Color(0xff008000), // Green
-                    height: 120.0,
-                  ),
+                  Column(
+                    children: <Widget>[
+                      Container(
+                        // A fixed-height child.
+                        color: const Color(0xff808000), // Yellow
+                        height: 120.0,
+                      ),
+                      Container(
+                        // Another fixed-height child.
+                        color: const Color(0xff008000), // Green
+                        height: 120.0,
+                      ),
+                      Container(
+                        // A fixed-height child.
+                        color: const Color(0xff808000), // Yellow
+                        height: 120.0,
+                      ),
+                      Container(
+                        // Another fixed-height child.
+                        color: const Color(0xff008000), // Green
+                        height: 120.0,
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),
