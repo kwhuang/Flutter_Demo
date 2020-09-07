@@ -28,6 +28,8 @@ dependencies:
   url_launcher: ^5.4.10
   # 上下拉抽屉效果
   sliding_up_panel: ^0.3.6
+  #左滑删除
+  flutter_slidable:
 
   #start
   #吐司

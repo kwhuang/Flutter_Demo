@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_demo/widget_demo/DragUpDemoPage.dart';
+import 'package:flutter_widget_demo/widget_demo/SlideAbleDemo.dart';
 import 'widget_demo/DefaultTabController.dart';
 import 'widget_demo/SingleChildScrollView.dart';
 import 'widget_demo/StreamController.dart';
@@ -145,7 +146,8 @@ class ListDemo extends StatelessWidget {
     'ListViewCutDownDemo',
     'DataSharingDemo',
     'CustomPaintorDemo',
-    'DragUpDemoPage'
+    'DragUpDemoPage',
+    'SlideAbleDemo'
   ];
 
   @override
@@ -220,6 +222,10 @@ class ListDemo extends StatelessWidget {
                 }else if (index == 11 ) {
                   Navigator.push(context, MaterialPageRoute(builder: (context){
                     return DragUpDemoPage();
+                  }));
+                } else if (index == 12 ) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context){
+                    return SlideAbleDemo(title: 'slideDemo',);
                   }));
                 }
 
